@@ -1,6 +1,7 @@
 package com.example.myblog.config.oauth;
 
 
+import com.example.myblog.config.auth.PrincipalDetails;
 import com.example.myblog.config.oauth.provider.FacebookUserInfo;
 import com.example.myblog.config.oauth.provider.GoogleUserInfo;
 import com.example.myblog.config.oauth.provider.OAuth2UserInfo;
@@ -8,6 +9,7 @@ import com.example.myblog.model.RoleType;
 import com.example.myblog.model.User;
 import com.example.myblog.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
@@ -60,6 +62,6 @@ public class UserOAuth2Service extends DefaultOAuth2UserService {
 
 
 
-        return new PrincipalDetials(newUser, oAuth2User.getAttributes());
+        return new PrincipalDetails(newUser, oAuth2User.getAttributes());
     }
 }

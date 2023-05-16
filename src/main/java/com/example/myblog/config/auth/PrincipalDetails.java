@@ -6,6 +6,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
 
@@ -24,48 +25,58 @@ public class PrincipalDetails implements UserDetails, OAuth2User {      //UserDe
         this.user       = user;
         this.attributes = attributes;
     }
-    @Override
-    public String getName() {
-        return null;
-    }
+
 
     @Override
     public Map<String, Object> getAttributes() {
-        return null;
+
+        return attributes;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        Collection<GrantedAuthority> collection = new ArrayList<>();
+        collection.add(() -> {
+            return "ROLE_" + user.getRole();
+        });
+        return collection;
     }
 
     @Override
     public String getPassword() {
-        return null;
+        return user.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return null;
+        return user.getUsername();
     }
 
+    //계정 말료 여부 (true:만료X)
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
+    ///계정 말료 여부 (true:잠김X)
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
+    //비밀번호 만료 여부(true:만료X)
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
+    //게정이 사용 가능한지 (true:활성화(사용가능))
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
+    }
+    @Override
+    public String getName() {
+        return null;
     }
 }
