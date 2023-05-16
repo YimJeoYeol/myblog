@@ -1,5 +1,7 @@
 package com.example.myblog.model;
 
+import com.example.myblog.dto.response.UserResponseDto;
+import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -45,6 +47,22 @@ public class User extends BaseTimeEntity{
     }
 
     public UserResponseDto toDto(){
+        return UserResponseDto.builder()
+                              .id(id)
+                              .username(username)
+                              .password(password)
+                              .email(email)
+                              .build();
+    }
 
+    @Builder
+    public User(long id, String username, String password, String email, RoleType role, String provider, String providerId) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.role = role;
+        this.provider = provider;
+        this.providerId = providerId;
     }
 }
