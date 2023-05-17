@@ -37,8 +37,7 @@ public class Board extends BaseTimeEntity{
 
     @OneToMany(mappedBy = "board",
             fetch = FetchType.EAGER,
-            cascade = CascadeType.REMOVE
-    )
+            cascade = CascadeType.REMOVE)
     @JsonIgnoreProperties({"board"})
     @OrderBy("id desc")
     private List<Reply> replyList;
