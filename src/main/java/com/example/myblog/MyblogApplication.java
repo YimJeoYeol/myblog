@@ -15,8 +15,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class MyblogApplication {
     private final PrincipalDetailService principalDetailService;
     @Bean
+    //비밀번호 해쉬화
     public BCryptPasswordEncoder encoderPW(){
         return new BCryptPasswordEncoder();
+
     }
     protected void config(AuthenticationManagerBuilder builder)throws Exception{
         builder.userDetailsService(principalDetailService).passwordEncoder(encoderPW());
